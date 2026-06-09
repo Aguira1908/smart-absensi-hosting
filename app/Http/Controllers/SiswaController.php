@@ -105,6 +105,13 @@ class SiswaController extends Controller
     // =========================
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required',
+            'nis' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
+            'orangtua_id' => 'required|exists:users,id'
+        ]);
+
         DB::table('siswa')
             ->where('id', $id)
             ->update([
